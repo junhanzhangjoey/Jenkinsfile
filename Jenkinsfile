@@ -1,28 +1,12 @@
 pipeline {
     agent any
     stages {
-        stage('No-op') {
+        stage('Check Docker Version') {
             steps {
-                sh 'ls'
+                script {
+                    sh 'docker version'
+                }
             }
-        }
-    }
-    post {
-        always {
-            echo 'One way or another, I have finished'
-            deleteDir() /* clean up our workspace */
-        }
-        success {
-            echo 'I succeeded!'
-        }
-        unstable {
-            echo 'I am unstable :/'
-        }
-        failure {
-            echo 'I failed :('
-        }
-        changed {
-            echo 'Things were different before...'
         }
     }
 }

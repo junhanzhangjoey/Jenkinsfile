@@ -1,12 +1,11 @@
 pipeline {
-    agent any
-    environment {
-        PATH = "/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin" // 设置正确的 PATH
+    agent {
+        docker { image 'node:22.14.0-alpine3.21' }
     }
     stages {
-        stage('Example') {
+        stage('Test') {
             steps {
-                sh 'echo Hello World'
+                sh 'node --eval "console.log(process.arch,process.platform)"'
             }
         }
     }
